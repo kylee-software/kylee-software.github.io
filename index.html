@@ -12,7 +12,7 @@
     </form>
     <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
     <script>
-        var widget = new paydock.HtmlWidget('#widget', 'publicKey');
+        var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
         widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
         widget.load();
     </script>
