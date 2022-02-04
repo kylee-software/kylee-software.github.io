@@ -6,13 +6,15 @@
     <style>iframe {border: 0;width: 100%;height: 300px;}</style>
 </head>
 <body>
-  <center><img src="/patrick.jpg" style="width: 33%; height:33%;"></center>    
+  <center><img src="/patrick.jpg" style="width: 33%; height:33%;"></center> 
+  <br>   
   <span style="font-size: 30px;"><b><center>How much would you like to bid for the pineapple under the sea?</b> <input name='amount' id='amount' type='number'></center></span>
+  <br>
   <form id="paymentForm">    
     <div id="widget"></div>
     </form>
 
-    <p><center><b>Your Payment Token is: </b><input name="payment_source_token" id="payment_source_token" readonly></center></p>
+    <span style="font-size: 15px;"><center><b>Your Payment Token is: </b><input name="payment_source_token" id="payment_source_token" readonly></center></span>
 
     <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
     <script>
