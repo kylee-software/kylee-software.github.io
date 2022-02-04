@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>iframe {border: 0;width: 100%;height: 300px;}</style>
+</head>
+<body>
+    <form id="paymentForm">
+        <div id="widget"></div>
+        <input name="payment_source_token" id="payment_source_token" type="hidden">
+    </form>
+    <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
+    <script>
+        var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
+        widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
+        widget.setWebHookDestination("https://webhook.site/24739c92-e85a-4716-8480-2b81060efbbc?");
+        widget.load();
 
-    <head>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <title>Donate to save puppies</title>
-        <style>iframe {border: 0;width: 100%;height: 300px;}</style>
-    </head>
+        var myHeaders = new Headers();
+        myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
+        myHeaders.append("Content-Type", "application/json");
 
-    <body>
+        var raw = JSON.stringify({
+          "amount": "17",
+          "currency": "AUD",
+          "reference": "ch_ref",
+          "description": "ch_desc",
+          "token" : "a4c1ec67-3b1f-4bf2-8248-c1abba25455b"
+        });
 
-        <div class="container">
-            <div class="col-sm-5">
-                <h1>Donate to save puppies</h1>
-                <form id="donation_form" method="post" action="form.php">
-                    <div class="form-group">
-                        <label>Donate </label>
-                        <select class="form-control" name="donation">
-                            <option value="100">$100</option>
-                            <option value="50">$50</option>
-                        </select>
-                    </div>
-                    <div class="form-group" id="iframeForm">
-                    </div>
-                    <input type="hidden" id="payment_source" name="payment_source">
-                </form>
-            </div>
-        </div>
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
 
-        <script src="https://app.paydock.com/v1/widget.umd.min.js"></script>
-        <script>
-            var widget = new paydock.HtmlWidget('#iframeForm', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4', '61fc63c40e99c722876c913c'); // public key, gateway_id here
-            widget.setEnv('sandbox');
-            widget.onFinishInsert('#payment_source', 'payment_source');
-
-            widget.on('finish', function (data) {
-                 document.forms[0].submit();
-            });
-
-            widget.load();
-        </script>
-
-    </body>
+        fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
+    </script>
+</body>
 </html>
