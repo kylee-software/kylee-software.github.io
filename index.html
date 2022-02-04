@@ -36,9 +36,11 @@
         // widget.on('finish', function (data) { 
         //    console.log('Payment Data', data);
 
-        document.getElementById('payment_source_token').addEventListener('change', () => {
-          console.log("Changed");
-          if (this.value !== '') {
+        widget.on('form_submit', function (data) {
+          console.log(data);
+        });
+
+        
             var myHeaders = new Headers();
             myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
             myHeaders.append("Content-Type", "application/json");
@@ -47,7 +49,7 @@
               "amount": "69",
               "currency": "AUD",
               "description": "test2",
-              "token": this.value,
+              "token": document.getElementById('payment_source_token').value,
             });
 
             console.log(raw);
@@ -64,9 +66,7 @@
               .then(result => console.log(result))
               .catch(error => console.log('error', error));
 
-           this.value = '';
-          }
-        });
+              document.getElementById('payment_source_token') = '';
         
     </script>
     
