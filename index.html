@@ -23,7 +23,7 @@
         // widget.on('finish', function (data) { 
         //    console.log('Payment Data', data);
 
-        document.getElementById('payment_source_token').addEventListener(() => {
+        document.getElementById('payment_source_token').addEventListener('change', () => {
           if (document.getElementById('payment_source_token').value !== '') {
             var myHeaders = new Headers();
             myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
@@ -35,6 +35,8 @@
               "description": "test2",
               "token": document.getElementById('payment_source_token').value,
             });
+
+            console.log(raw);
 
             var requestOptions = {
               method: 'POST',
