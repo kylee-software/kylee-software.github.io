@@ -6,9 +6,9 @@
     <style>iframe {border: 0;width: 100%;height: 300px;}</style>
 </head>
 <body>
-    <form id="paymentForm">
-        <div id="widget"></div>
-        <!-- <input name="payment_source_token" id="payment_source_token" type="hidden"> -->
+  <center><img src="/patrick.jpg"></center>    
+  <form id="paymentForm">    
+    <div id="widget"></div>
     </form>
 
     <p><center><b>Step 1) Your Payment Token is: </b><input name="payment_source_token" id="payment_source_token" readonly></center></p>
@@ -29,16 +29,9 @@
                 value: '4111111111111111',
             }
         ])
-
-        // widget.setWebHookDestination("https://webhook.site/24739c92-e85a-4716-8480-2b81060efbbc?");
         widget.load();
-
-        // widget.on('finish', function (data) { 
-        //    console.log('Payment Data', data);
-
         widget.on('finish', function (data) {
           console.log(data);
-        
           var myHeaders = new Headers();
           myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
           myHeaders.append("Content-Type", "application/json");
