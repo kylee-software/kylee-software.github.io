@@ -17,29 +17,30 @@
         widget.setWebHookDestination("https://webhook.site/24739c92-e85a-4716-8480-2b81060efbbc?");
         widget.load();
 
-        var myHeaders = new Headers();
-        myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
-        myHeaders.append("Content-Type", "application/json");
+        <p><center><b>Step 1) Your Payment Token is: </b><input name="payment_source_token" id="payment_source_token" readonly></center></p>
+        // var myHeaders = new Headers();
+        // myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
+        // myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-          "amount": "17",
-          "currency": "AUD",
-          "reference": "ch_ref",
-          "description": "ch_desc",
-          "token" : "a4c1ec67-3b1f-4bf2-8248-c1abba25455b"
-        });
+        // var raw = JSON.stringify({
+        //   "amount": "17",
+        //   "currency": "AUD",
+        //   "reference": "ch_ref",
+        //   "description": "ch_desc",
+        //   "token" : "a4c1ec67-3b1f-4bf2-8248-c1abba25455b"
+        // });
 
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
+        // var requestOptions = {
+        //   method: 'POST',
+        //   headers: myHeaders,
+        //   body: raw,
+        //   redirect: 'follow'
+        // };
 
-        fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
+        // fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
+        //   .then(response => response.text())
+        //   .then(result => console.log(result))
+        //   .catch(error => console.log('error', error));
     </script>
 </body>
 </html>
