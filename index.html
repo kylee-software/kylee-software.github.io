@@ -12,8 +12,9 @@
   <br>
 
   <form id="paymentForm">    
-    <div id="widget"></div>
-    </form>
+    <div id="widget"
+      finish-text= "Thank you, your bid has been successfully accepted"></div>
+  </form>
 
     <br>
     <span style="font-size: 25px;"><center><b><u>For Developers</u></b></center></span>
@@ -23,6 +24,11 @@
     <script>
         var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
         widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
+        widget.setStyles({
+          background_color: '#E7E7E7',
+          font_size: '25px',
+          button_color: '#FFF03C'
+        })
         widget.setFormElements([
             {
                 field:  'card_name*',
