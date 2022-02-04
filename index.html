@@ -16,7 +16,8 @@
         widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
         // widget.setWebHookDestination("https://webhook.site/24739c92-e85a-4716-8480-2b81060efbbc?");
         widget.load();
-
+        widget.on('finish', function (data) { 
+           console.log('Payment Data', data);
         
         // var myHeaders = new Headers();
         // myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
