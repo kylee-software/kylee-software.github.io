@@ -8,16 +8,17 @@
 <body>
     <form id="paymentForm">
         <div id="widget"></div>
-        <input name="payment_source_token" id="payment_source_token" type="hidden">
+        <!-- <input name="payment_source_token" id="payment_source_token" type="hidden"> -->
     </form>
     <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
     <script>
         var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
-        widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
+        // widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
         // widget.setWebHookDestination("https://webhook.site/24739c92-e85a-4716-8480-2b81060efbbc?");
         widget.load();
-        widget.on('finish', function (data) { 
-           console.log('Payment Data', data);
+
+        // widget.on('finish', function (data) { 
+        //    console.log('Payment Data', data);
         
         // var myHeaders = new Headers();
         // myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
