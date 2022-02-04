@@ -38,33 +38,33 @@
 
         widget.on('finish', function (data) {
           console.log(data);
-        });
-
         
-        var myHeaders = new Headers();
-        myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
-        myHeaders.append("Content-Type", "application/json");
+          var myHeaders = new Headers();
+          myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
+          myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-          "amount": "69",
-          "currency": "AUD",
-          "description": "test2",
-          "token": document.getElementById('payment_source_token').value,
-        });
+          var raw = JSON.stringify({
+            "amount": "69",
+            "currency": "AUD",
+            "description": "test2",
+            "token": document.getElementById('payment_source_token').value,
+          });
 
-        console.log(raw);
+          console.log(raw);
 
-        var requestOptions = {
-          method: 'POST',
-          headers: myHeaders,
-          body: raw,
-          redirect: 'follow'
-        };
+          var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+          };
 
-        fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
-          .then(response => response.text())
-          .then(result => console.log(result))
-          .catch(error => console.log('error', error));
+          fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
+        });  
     </script>
     
 </body>
