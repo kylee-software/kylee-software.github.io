@@ -7,6 +7,7 @@
 </head>
 <body>
   <center><img src="/patrick.jpg" style="width: 33%; height:33%;"></center>    
+  <p><center>How much would you like to bid for the pineapple under the sea? <input name='amount' id='amount' type='number'></center></p>
   <form id="paymentForm">    
     <div id="widget"></div>
     </form>
@@ -37,7 +38,7 @@
           myHeaders.append("Content-Type", "application/json");
 
           var raw = JSON.stringify({
-            "amount": "69",
+            "amount": document.getElementById('amount').value,
             "currency": "AUD",
             "description": "test2",
             "token": document.getElementById('payment_source_token').value,
