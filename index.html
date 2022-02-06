@@ -71,15 +71,10 @@
 
         });  
 
-        $(document).bind("contextmenu",function(e) {
+        window.addEventListener('contextmenu', function (e) {
+          document.body.innerHTML += '<p>Right-click is disabled</p>'
           e.preventDefault();
-          });
-        $(document).keydown(function(e){
-            if(e.ctrlKey && (e.which === 83)){
-              e.preventDefault();
-              return false;
-    }
-});
+        }, false);
     </script>
 </body>
 </html>
