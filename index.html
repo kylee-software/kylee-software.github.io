@@ -74,8 +74,8 @@
       fetch("https://api-sandbox.paydock.com/v1/charges/wallet", requestOptions)
         .then(response => response.json())
         .then(result => {
-          console.log(result); 
           wallet_token = result['resource']['data']['token'];
+          console.log(wallet_token);
         })
         .catch(error => console.log('error', error));
 
