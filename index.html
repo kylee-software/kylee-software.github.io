@@ -7,77 +7,75 @@
 </head>
 <body>
   <center><img src="/patrick.jpg" style="width: 33%; height:33%;"></center> 
-  <br>   
-  <span style="font-size: 30px;"><b><center>How much would you like to bid for the pineapple under the sea?</b> <input name='amount' id='amount' type='number'></center></span>
-  <br>
-
+    
+  <br> <span style="font-size: 30px;"><b><center>How much would you like to bid for the pineapple under the sea?</b> <input name='amount' id='amount' type='number'></center></span><br>
+  
   <form id="paymentForm">    
     <div id="widget"
       finish-text= "Thank you, your bid has been successfully accepted"></div>
   </form>
 
-    <br>
-    <span style="font-size: 25px;"><center><b><u>For Developers</u></b></center></span>
+    <br><span style="font-size: 25px;"><center><b><u>For Developers</u></b></center></span>
     <br><span style="font-size: 15px;"><center><b>Your One Time Payment Token is: </b><input name="payment_source_token" id="payment_source_token" style="width: 300px;" readonly></center></span>
     <br><span style="font-size: 15px;"><center><b>The Charge API response is: </b></center></span>
     <span><center><input name="result" id="result" style="height: 200px; width: 800px;" readonly></center></span>
 
-    <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
-    <script>
-        var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
-        widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
-        widget.setStyles({
-          background_color: '#FFFFFF',
-          button_color: '#FFF74E',
-        })
-        widget.setFormElements([
-            {
-                field:  'card_name*',
-                label: 'Card Holder Name',
-                value: 'Damo',
-            },
-            {
-                field:  'card_number*',
-                label: 'Card Number',
-                value: '4111111111111111',
-            }
-        ])
-        widget.load();
-        
-        widget.on('finish', function (data) {
-          console.log(data);
-          var myHeaders = new Headers();
-          myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
-          myHeaders.append("Content-Type", "application/json");
+  <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
+  <script>
+      var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
+      widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
+      widget.setStyles({
+        background_color: '#FFFFFF',
+        button_color: '#FFF74E',
+      })
+      widget.setFormElements([
+          {
+              field:  'card_name*',
+              label: 'Card Holder Name',
+              value: 'Damo',
+          },
+          {
+              field:  'card_number*',
+              label: 'Card Number',
+              value: '4111111111111111',
+          }
+      ])
+      widget.load();
+      
+      widget.on('finish', function (data) {
+        console.log(data);
+        var myHeaders = new Headers();
+        myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
+        myHeaders.append("Content-Type", "application/json");
 
-          var raw = JSON.stringify({
-            "amount": document.getElementById('amount').value,
-            "currency": "AUD",
-            "description": "test2",
-            "token": document.getElementById('payment_source_token').value,
-          });
+        var raw = JSON.stringify({
+          "amount": document.getElementById('amount').value,
+          "currency": "AUD",
+          "description": "test2",
+          "token": document.getElementById('payment_source_token').value,
+        });
 
-          console.log(raw);
+        console.log(raw);
 
-          var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            redirect: 'follow'
-          };
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
 
-          fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
+        fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
+          .then(response => response.text())
+          .then(result => console.log(result))
+          .catch(error => console.log('error', error));
 
-        });  
-        
-        //Disables Right Click 
-        window.addEventListener('contextmenu', function (e) {
-          e.preventDefault();
-        }, false);
+      });  
+      
+      //Disables Right Click 
+      window.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+      }, false);
 
-    </script>
+  </script>
 </body>
 </html>
