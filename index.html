@@ -61,7 +61,7 @@
             "gateway_id": "	61fc74ae0e99c722876d4f5c"
           }
         },
-        "amount": 10,
+        "amount": 100,
         "currency": "AUD",
         "reference": "reference123",
         "description": "description123",
@@ -81,6 +81,7 @@
       fetch("https://api-sandbox.paydock.com/v1/charges/wallet", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
+        .then(result => wallet_token = result['resource']['data']['token'])
         .catch(error => console.log('error', error));
 
       //Paypal Checkout Button
