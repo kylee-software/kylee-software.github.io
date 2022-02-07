@@ -67,9 +67,8 @@
         };
 
         fetch("https://api-sandbox.paydock.com/v1/charges", requestOptions)
-          .then(response => document.getElementById("result").value = response)
           .then(response => console.log(response))
-          // .then(result => console.log(result))
+          .then(result => console.log('result', result))
           .catch(error => console.log('error', error));
       
 
