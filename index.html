@@ -17,7 +17,8 @@
     
     <br><span style="font-size: 25px;"><center><b><u>For Developers</u></b></center></span>
     <br><span style="font-size: 20px;"><center><b>Your One Time Payment Token is: </b><input name="payment_source_token" id="payment_source_token" style="width: 300px;" readonly></center></span>
-    <br><div id="myData"></div>
+
+    <div id="widget"></div>
 
   <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
   <script>
@@ -45,17 +46,27 @@
         "#widget",
         charge_token,
         {
-            amount_label: "Total",
-            country: "DE",
-            wallets: ["google", "apple"],
+          request_shipping: true,
+          pay_later: true,
+          style: {
+            layout: 'horizontal',
+            color: 'blue',
+            shape: 'rect',
+            label: 'paypal',
+          },
         }
       );
-      button.setEnv('sandbox');
-      button.onUnavailable(() => console.log("No wallet buttons available"));
-      button.onPaymentSuccessful((data) => console.log("The payment was successful"));
-      button.onPaymentError((data) => console.log("The payment was not successful"));
-      button.onPaymentInReview((data) => console.log("The payment is on fraud review"));
-      button.load();
+        button.setEnv('sandbox');
+        button.onUnavailable(() => console.log("No wallet buttons available"));
+        button.onUpdate((data) => {
+        console.log("Updating amount via a backend to backend call to POST charges/:id");
+        // call `POST charges/:id` to modify charge
+        button.update({ success: true });
+      });
+        button.onPaymentSuccessful((data) => console.log("The payment was successful"));
+        button.onPaymentError((data) => console.log("The payment was not successful"));
+        button.onPaymentInReview((data) => console.log("The payment is on fraud review"));
+        button.load();
 
 
       //When widget completes action
