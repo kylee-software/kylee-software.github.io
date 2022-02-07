@@ -47,6 +47,7 @@
 
       //Wallet Token Variable
       var wallet_token = ''
+      let button = null;
       
 
       //Wallet Token API
@@ -75,25 +76,39 @@
         .then(response => response.json())
         .then(result => {
           wallet_token = result['resource']['data']['token'];
+          button = new paydock.WalletButtons(
+            "#widget",
+            wallet_token,
+            {
+              request_shipping: true,
+              pay_later: true,
+              style: {
+                layout: 'horizontal',
+                color: 'blue',
+                shape: 'rect',
+                label: 'paypal',
+              },
+            });
+      );
           console.log(wallet_token);
         })
         .catch(error => console.log('error', error));
 
       //Paypal Checkout Button
-      let button = new paydock.WalletButtons(
-        "#widget",
-        wallet_token,
-        {
-          request_shipping: true,
-          pay_later: true,
-          style: {
-            layout: 'horizontal',
-            color: 'blue',
-            shape: 'rect',
-            label: 'paypal',
-          },
-        }
-      );
+      //let button = new paydock.WalletButtons(
+        //"#widget",
+        //wallet_token,
+        //{
+          //request_shipping: true,
+          //pay_later: true,
+          //style: {
+            //layout: 'horizontal',
+            //color: 'blue',
+            //shape: 'rect',
+            //label: 'paypal',
+          //},
+        //}
+      //);
         button.setEnv('sandbox');
         button.onUnavailable(() => console.log("No wallet buttons available"));
         button.onUpdate((data) => {
