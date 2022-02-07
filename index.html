@@ -22,6 +22,7 @@
 
   <script src="https://app-sandbox.paydock.com/v1/widget.umd.js" ></script>
   <script>
+      //Card Widget
       var widget = new paydock.HtmlWidget('#widget', 'eccb894c4b8a5b7a0a331a7da42cb169cc73bbb4');
       widget.onFinishInsert('input[name="payment_source_token"]', 'payment_source');
       widget.setStyles({
@@ -42,9 +43,50 @@
       ])
       widget.load();
       
+      //Wallet Token Variable
+      var wallet_token = ''
+      
+      //Wallet Token API
+      var myHeaders = new Headers();
+        myHeaders.append("x-user-secret-key", "6963a6e97c1d0e522ad5d9c2ddcc52319ffb28dc");
+        myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        "customer": {
+          "first_name": "Damian",
+          "last_name": "Leung",
+          "email": "damian.leung@example.com",
+          "phone": "+1234567890",
+          "payment_source": {
+            "gateway_id": "	61fc74ae0e99c722876d4f5c"
+          }
+        },
+        "amount": 10,
+        "currency": "AUD",
+        "reference": "reference123",
+        "description": "description123",
+        "meta": {
+          "store_name": "123",
+          "store_id": "123"
+        }
+      });
+
+      var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        redirect: 'follow'
+      };
+
+      fetch("{{url}}/v1/charges/wallet", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+      //Paypal Checkout Button
       let button = new paydock.WalletButtons(
         "#widget",
-        document.getElementById('payment_source_token').value,
+        charge_token,
         {
           request_shipping: true,
           pay_later: true,
